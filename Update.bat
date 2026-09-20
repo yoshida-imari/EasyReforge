@@ -16,7 +16,7 @@ popd
 
 pushd %~dp0
 echo.
-echo https://github.com/Zuntan03/EasyReforge
+echo https://github.com/yoshida-imari/EasyReforge
 set "EASY_REFORGE_BRANCH="
 for /f "delims=" %%B in ('git branch --show-current') do set "EASY_REFORGE_BRANCH=%%B"
 if not defined EASY_REFORGE_BRANCH (

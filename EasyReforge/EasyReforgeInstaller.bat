@@ -5,8 +5,8 @@ set "PROJECT_NAME=EasyReforge"
 set "PROJECT_SETUP_BAT=%~dp0%PROJECT_NAME%\Setup.bat"
 set "PROJECT_MODEL_DOWNLOAD_BAT=%~dp0Download\NoobAiEpsilonPred_Minimum.bat"
 
-set PROJECT_URL=https://github.com/Zuntan03/%PROJECT_NAME%
-set PROJECT_BRANCH=main
+set PROJECT_URL=https://github.com/yoshida-imari/%PROJECT_NAME%
+set PROJECT_BRANCH=upgrade/reforge-main-2026
 set "PROJECT_DIR=%~dp0."
 set "EASY_TOOLS_DIR=%~dp0EasyTools"
 
