@@ -1,6 +1,10 @@
 @echo off
 chcp 65001 > NUL
 
+@REM Ignore stale machine-wide pip indexes by default (for example, pypi.ngc.nvidia.com).
+@REM Set EASYREFORGE_USE_SYSTEM_PIP_CONFIG=1 before running to keep the system pip configuration.
+if not defined EASYREFORGE_USE_SYSTEM_PIP_CONFIG set "PIP_CONFIG_FILE=nul"
+
 call %~dp0Reforge\Reforge.bat
 if %ERRORLEVEL% neq 0 ( exit /b 1 )
 
