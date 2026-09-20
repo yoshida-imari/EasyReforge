@@ -17,11 +17,24 @@ popd
 pushd %~dp0
 echo.
 echo https://github.com/Zuntan03/EasyReforge
-echo git -C EasyReforge fetch origin
+set "EASY_REFORGE_BRANCH="
+for /f "delims=" %%B in ('git branch --show-current') do set "EASY_REFORGE_BRANCH=%%B"
+if not defined EASY_REFORGE_BRANCH (
+	echo Detached HEAD; keeping the current EasyReforge revision.
+	goto :EASY_REFORGE_NO_REMOTE_BRANCH
+)
+echo git fetch origin
 git fetch origin
-echo git -C EasyReforge reset --hard origin/main
-git reset --hard origin/main
 if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
+git show-ref --verify --quiet refs/remotes/origin/%EASY_REFORGE_BRANCH%
+if %ERRORLEVEL% neq 0 (
+	echo No origin/%EASY_REFORGE_BRANCH% branch; keeping the current local branch.
+	goto :EASY_REFORGE_NO_REMOTE_BRANCH
+)
+echo git reset --hard origin/%EASY_REFORGE_BRANCH%
+git reset --hard origin/%EASY_REFORGE_BRANCH%
+if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
+:EASY_REFORGE_NO_REMOTE_BRANCH
 popd
 
 call %~dp0EasyReforge\Setup.bat

@@ -18,6 +18,11 @@ if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 call %GITHUB_CLONE_OR_PULL% Bing-su adetailer main 36189cbea735b85fd01e98ac42002b8ce6f0e41d
 if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 
+@REM reForge pins protobuf 3.20.0; keep MediaPipe on the compatible 0.10.11 line.
+echo copy /Y "%~dp0src\adetailer_install.py" "adetailer\install.py"
+copy /Y "%~dp0src\adetailer_install.py" "adetailer\install.py"
+if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
+
 @REM https://github.com/Panchovix/reForge-Sigmas_merge
 call %GITHUB_CLONE_OR_PULL% Panchovix reForge-Sigmas_merge main 027b89f07d0d44fae12a1fab4a73f4f770a066cd
 if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
@@ -93,6 +98,11 @@ if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 echo %CURL_CMD% -o stable-diffusion-webui-wd14-tagger\tagger\utils.py https://gist.githubusercontent.com/Zuntan03/ec9010bef0f8fce5b752facd3f8053f0/raw
 %CURL_CMD% -o stable-diffusion-webui-wd14-tagger\tagger\utils.py https://gist.githubusercontent.com/Zuntan03/ec9010bef0f8fce5b752facd3f8053f0/raw
 if %ERRORLEVEL% neq 0 ( pause & popd & exit /b 1 )
+
+@REM TensorFlow/DeepDanbooru conflict with reForge's protobuf pin; WD14 ONNX stays available.
+echo copy /Y "%~dp0src\wd14_requirements.txt" "stable-diffusion-webui-wd14-tagger\requirements.txt"
+copy /Y "%~dp0src\wd14_requirements.txt" "stable-diffusion-webui-wd14-tagger\requirements.txt"
+if %ERRORLEVEL% neq 0 ( popd & exit /b 1 )
 
 @REM https://github.com/KohakuBlueleaf/z-tipo-extension
 call %GITHUB_CLONE_OR_PULL% KohakuBlueleaf z-tipo-extension main 32d61cf213f6346b05e69fc57fe830ecd9fbfca8
